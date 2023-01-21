@@ -1,0 +1,16 @@
+.footer-container {
+    height: 4rem;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-container p {
+    color: white;
+}
+
+button {
+    border: none;
+}
