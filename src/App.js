@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
 import axios from 'axios';
-import Header from './components/Header';
+import './App.css';
 import Products from './components/Products';
-import Footer from './components/Footer';
+import Loader from './components/Loader';
 
 class App extends Component {
 
@@ -11,7 +10,7 @@ class App extends Component {
     super();
     this.state = {
       products: [],
-      isFetch: false
+      isFetch: true
     }
   }
 
@@ -21,7 +20,7 @@ class App extends Component {
         this.setState({ products: [response.data].flat() });
       })
       .catch((err) => {
-        this.setState({ isFetch: true });
+        this.setState({ isFetch: false });
         console.error(err);
       });
   }
@@ -29,46 +28,23 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.isFetch === true ?
+        {this.state.isFetch === false ?
           <div className='fetch-fail'>
             <h2> Something went wrong !</h2>
           </div>
           :
           (this.state.products.length === 0 ?
-            <div className="loader-container">
-              <div className="lds-spinner">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            </div>
+            <Loader />
             :
             (this.state.products[0] === "" ?
               <div className="no-data">
                 <h1>No data found</h1>
               </div>
               :
-              <div>
-                <div className='header-container'>
-                  <Header />
-                </div>
-                <div className="main-coontainer">
-                  <ul>
-                    <Products products={this.state.products} />
-                  </ul>
-                </div>
-                <div className='footer-container'>
-                  <Footer />
-                </div>
+              <div className="main-coontainer">
+                <ul>
+                  <Products products={this.state.products} />
+                </ul>
               </div>
             )
           )
