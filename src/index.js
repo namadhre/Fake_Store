@@ -14,7 +14,7 @@ root.render(
       <Route path="/" exact>
         <App />
       </Route>
-      <Route path="/product/:id" component={Product} exact>
+      <Route path="/product/:id" component={Product}>
       </Route>
     </Router>
   </React.StrictMode>,
