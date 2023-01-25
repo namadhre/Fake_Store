@@ -42,6 +42,17 @@
     justify-content: space-evenly;
 }
 
+.fail-fetch{
+    color: #ff0000;
+    display: flex;
+    justify-content: center;
+}
+
+.no-product{
+    display: flex;
+    justify-content: center;
+}
+
 @media screen and (max-width: 670px) {
     .content-container-product {
         display: flex;
