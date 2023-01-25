@@ -34,7 +34,7 @@ p {
     width: 100px;
     height: 40px;
     background-color: #377e80;
-    color: white;
+    color: #ffffff;
     border-radius: 7px;
     margin-top: 2rem;
 }
@@ -51,11 +51,11 @@ ul {
     height: 25px;
     background-color: #388e3c;
     border-radius: 5px;
-    color: white;
+    color: #ffffff;
 }
 
 .fa-regular {
-    color: white;
+    color: #ffffff;
 }
 
 .container {
@@ -85,4 +85,9 @@ h3 {
 span {
     font-size: smaller;
     padding-left: 0.5rem;
+}
+
+a{
+    text-decoration: none;
+    color: #000000;   
 }
