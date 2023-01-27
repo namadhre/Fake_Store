@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import Header from './components/Header';
 import Product from './components/Product';
+import Carts from './components/Carts';
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
@@ -16,7 +17,9 @@ root.render(
       </Route>
       <Route path="/product/:id" component={Product}>
       </Route>
+      <Route path="/cart">
+        <Carts />
+      </Route>
     </Router>
   </React.StrictMode>,
 );
-
