@@ -42,7 +42,7 @@ class Carts extends Component {
                             <div className='main-right-container'>
                                 <div className='header-container'>
                                     <h3>Items in your cart</h3>
-                                    <p>(<span>{this.state.items.products.length}</span>)</p>
+                                    <p>(<span>{this.state.items.products.length}</span> )</p>
                                 </div>
                             </div>
 
@@ -69,8 +69,6 @@ class Carts extends Component {
                         </div>
 
                     </div >
-
-
         );
     }
 }
