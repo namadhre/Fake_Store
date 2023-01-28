@@ -6,32 +6,67 @@ import Loader from './Loader';
 class Cart extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            product: null,
-            isLoaded: true
+
+        this.API_STATES = {
+            LOADING: "loading",
+            LOADED: "loaded",
+            ERROR: "error",
         }
 
+        this.state = {
+            product: null,
+            status: this.API_STATES.LOADING,
+            errorMessage: "",
+
+        };
+
+        this.URL = `https://fakestoreapi.com/products/${this.props.productId}`;
     }
-    componentDidMount() {
-        axios.get(`https://fakestoreapi.com/products/${this.props.productId}`)
-            .then((response) => {
-                this.setState({ product: response.data });
-            })
-            .catch((err) => {
-                this.setState({ isLoaded: false })
-            })
+
+    fetchData = (url) => {
+        this.setState({
+            status: this.API_STATES.LOADING,
+        }, () => {
+            axios.get(url)
+                .then((response) => {
+                    this.setState({
+                        status: this.API_STATES.LOADED,
+                        products: response.data,
+                    })
+
+                })
+                .catch((error) => {
+                    this.setState({
+                        status: this.API_STATES.ERROR,
+                        errorMessage: "An API error occurred. Please try again in a few minutes."
+                    })
+                })
+        })
+    }
+
+    componentDidMount = () => {
+        this.fetchData(this.URL)
     }
 
     render() {
+
         return (
-            this.state.isLoaded === false ?
-                <div className='fetch-fail'>
-                    <h2> Something went wrong !</h2>
-                </div>
-                :
-                this.state.product === null ?
+            <>
+                {this.state.status === this.API_STATES.ERROR &&
+                    <div className='fetch-fail'>
+                        <h2>{this.state.errorMessage}</h2>
+                    </div>
+                }
+                {this.state.status === this.API_STATES.LOADING &&
                     <Loader />
-                    :
+                }
+
+                {this.state.status === this.API_STATES.LOADED && this.state.product === "" &&
+                    <div className='fetch-fail'>
+                        <h2>No products available at the moment. Please try again later.</h2>
+                    </div>
+                }
+                {this.state.status === this.API_STATES.LOADED && this.state.product !== "" &&
                     <div className="left-container">
                         <div className="box">
                             <Link to={`/product/${this.state.product.id}`}>
@@ -60,6 +95,8 @@ class Cart extends Component {
                             </div>
                         </div>
                     </div>
+                }
+            </>
         )
     }
 }
