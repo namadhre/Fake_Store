@@ -31,7 +31,7 @@ class Cart extends Component {
                 .then((response) => {
                     this.setState({
                         status: this.API_STATES.LOADED,
-                        products: response.data,
+                        product: response.data,
                     })
 
                 })
