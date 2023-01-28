@@ -34,7 +34,7 @@ class Carts extends Component {
                 .then((response) => {
                     this.setState({
                         status: this.API_STATES.LOADED,
-                        products: response.data,
+                        items: response.data,
                     })
                 })
                 .catch((err) => {
@@ -47,10 +47,13 @@ class Carts extends Component {
     }
 
     componentDidMount = () => {
+        console.log("Hello")
         this.fetchData(this.URL)
     }
 
     render() {
+
+        console.log(this.state.items);
 
         return (
             <>
